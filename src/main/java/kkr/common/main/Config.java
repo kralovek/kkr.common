@@ -2,12 +2,15 @@ package kkr.common.main;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import kkr.common.errors.ConfigurationException;
 
 public class Config {
 	protected List<String> propertiesFiles = new ArrayList<String>();
+	protected Map<String, String> parameters = new LinkedHashMap<String, String>();
 	protected String config;
 	protected String bean;
 	protected String configLog;
@@ -52,6 +55,14 @@ public class Config {
 				propertiesFiles.add(part);
 			}
 			return true;
+		} else if (paramName.startsWith("-parameter:")) {
+			String propertyName = paramName.substring("-parameter:".length());
+			if (propertyName.isEmpty() || !propertyName.matches("[_a-zA-Z][a-zA-Z0-9]*")) {
+				throw new ConfigurationException("Command line parameter '-parameter' has bad value in propertyName part: '" + propertyName
+						+ "'. Syntax is -parameter:parameterName=parameterValue");
+			}
+			parameters.put(propertyName, paramValue);
+			return true;
 		} else {
 			return false;
 		}
@@ -71,5 +82,9 @@ public class Config {
 
 	public String getConfigLog() {
 		return configLog;
+	}
+
+	public Map<String, String> getParameters() {
+		return parameters;
 	}
 }

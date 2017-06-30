@@ -2,6 +2,7 @@ package kkr.common.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
+import java.util.Date;
 
 public class UtilsString {
 	public static String listToString(Collection<String> values, String before, String after, String separator) {
@@ -56,5 +57,47 @@ public class UtilsString {
 
 	public static String right(String string, int index) {
 		return string == null ? null : string.substring(string.length() - Math.min(string.length(), index));
+	}
+
+	public static String toStringDateDelta(Date dateBegin, Date dateEnd) {
+		long delta = dateEnd.getTime() - dateBegin.getTime();
+
+		long ms = delta % 1000;
+		delta = (delta - ms) / 1000;
+
+		long sec = delta % 60;
+		delta = (delta - sec) / 60;
+
+		if (delta == 0) {
+			return String.format("%d.%03d", sec, ms);
+		}
+
+		long min = delta % 60;
+		delta = (delta - min) / 60;
+
+		if (delta == 0) {
+			return String.format("%d:%02d.%03d", min, sec, ms);
+		}
+
+		long hour = delta % 24;
+		delta = (delta - hour) / 24;
+
+		if (delta == 0) {
+			return String.format("%d:%02d:%02d.%03d", hour, min, sec, ms);
+		}
+
+		long day = delta;
+		return String.format("%d days %d:%02d:%02d.%03d", day, hour, min, sec, ms);
+	}
+
+	public static String replaceFirst(String text, String key, String value) {
+		if (text == null || key == null) {
+			return text;
+		}
+		int iPos = text.indexOf(key);
+		if (iPos == -1) {
+			return text;
+		}
+		return text.substring(0, iPos) + value + text.substring(iPos + key.length());
 	}
 }

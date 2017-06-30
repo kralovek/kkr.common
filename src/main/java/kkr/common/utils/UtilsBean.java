@@ -19,13 +19,7 @@ import org.springframework.core.io.Resource;
 
 public class UtilsBean {
 
-	private static UtilsBean instance = new UtilsBean();
-
-	public static final UtilsBean getInstance() {
-		return instance;
-	}
-
-	public BeanFactory createBeanFactory(String config, List<String> propertiesList, Map<String, String> parameters) {
+	public static BeanFactory createBeanFactory(String config, List<String> propertiesList, Map<String, String> parameters) {
 		// DO NOT USE LOG HERE
 
 		File fileConfig = new File(config);
@@ -76,7 +70,7 @@ public class UtilsBean {
 		return configurableApplicationContext;
 	}
 
-	private Properties toProperties(List<String> propertiesList) {
+	private static Properties toProperties(List<String> propertiesList) {
 		Properties propertiesAll = null;
 		if (propertiesList != null && !propertiesList.isEmpty()) {
 			Resource[] resources = new Resource[propertiesList.size()];
@@ -94,13 +88,13 @@ public class UtilsBean {
 		return propertiesAll;
 	}
 
-	private Properties toProperties(Map<String, String> parameters) {
+	private static Properties toProperties(Map<String, String> parameters) {
 		Properties properties = new Properties();
 		properties.putAll(parameters);
 		return properties;
 	}
 
-	private Properties toProperties(Resource[] resources) {
+	private static Properties toProperties(Resource[] resources) {
 		Properties properties = new Properties();
 		for (Resource resource : resources) {
 			InputStream inputStream = null;

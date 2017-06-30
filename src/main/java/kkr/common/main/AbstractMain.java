@@ -23,8 +23,7 @@ import kkr.common.utils.UtilsBean;
 public abstract class AbstractMain {
 	private static final Logger LOG = Logger.getLogger(AbstractMain.class);
 
-	public static <T> T createBeanNoLog(Config config, Class<T> clazz, String configDefault, String beanDefault)
-			throws BaseException {
+	public static <T> T createBeanNoLog(Config config, Class<T> clazz, String configDefault, String beanDefault) throws BaseException {
 		T retval = createBean(true, config, clazz, configDefault, beanDefault, null, null);
 		return retval;
 	}
@@ -79,7 +78,7 @@ public abstract class AbstractMain {
 
 				String configFile = config.getConfig() != null ? config.getConfig() : configDefault;
 
-				BeanFactory beanFactory = UtilsBean.getInstance().createBeanFactory(configFile, propertiesList, parameters);
+				BeanFactory beanFactory = UtilsBean.createBeanFactory(configFile, propertiesList, parameters);
 
 				String idBean = config.getBean() != null ? config.getBean() : beanDefault;
 

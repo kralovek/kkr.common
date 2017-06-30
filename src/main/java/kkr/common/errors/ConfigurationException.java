@@ -1,6 +1,6 @@
 package kkr.common.errors;
 
-public class ConfigurationException extends RuntimeException {
+public class ConfigurationException extends BaseException {
 
 	public ConfigurationException() {
 		super();
