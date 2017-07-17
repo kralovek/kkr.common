@@ -1,5 +1,7 @@
 package kkr.common.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Date;
@@ -99,5 +101,13 @@ public class UtilsString {
 			return text;
 		}
 		return text.substring(0, iPos) + value + text.substring(iPos + key.length());
+	}
+
+	public static String toStringException(Throwable ex) {
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		PrintStream printStream = new PrintStream(byteArrayOutputStream);
+		ex.printStackTrace(printStream);
+		printStream.close();
+		return byteArrayOutputStream.toString();
 	}
 }

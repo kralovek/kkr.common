@@ -209,25 +209,31 @@ public class UtilsFile {
 		}
 	}
 
-	public static void contentToFile(final String pContent, final File pFile) throws BaseException {
-		FileOutputStream fileOutputStream = null;
+	public static void contentToFile(final String content, final File file) throws BaseException {
+		LOG.trace("BEGIN: " + file.getAbsolutePath());
 		try {
-			createFileDirectory(pFile);
-			fileOutputStream = new FileOutputStream(pFile);
-			if (pContent != null) {
-				fileOutputStream.write(pContent.getBytes());
-			}
-			fileOutputStream.close();
-			fileOutputStream = null;
-		} catch (final IOException ex) {
-			throw new TechnicalException("Cannot crate the file: " + pFile.getAbsolutePath());
-		} finally {
-			if (fileOutputStream != null) {
-				try {
-					fileOutputStream.close();
-				} catch (final IOException ex) {
+			FileOutputStream fileOutputStream = null;
+			try {
+				createFileDirectory(file);
+				fileOutputStream = new FileOutputStream(file);
+				if (content != null) {
+					fileOutputStream.write(content.getBytes());
+				}
+				fileOutputStream.close();
+				fileOutputStream = null;
+			} catch (final IOException ex) {
+				throw new TechnicalException("Cannot crate the file: " + file.getAbsolutePath());
+			} finally {
+				if (fileOutputStream != null) {
+					try {
+						fileOutputStream.close();
+					} catch (final IOException ex) {
+					}
 				}
 			}
+			LOG.trace("OK");
+		} finally {
+			LOG.trace("END");
 		}
 	}
 }

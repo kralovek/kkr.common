@@ -35,7 +35,7 @@ public class DataSourceJdbc extends DataSourceJdbcFwk implements DataSource {
 				url = "jdbc:oracle:thin:@//" + host + ":" + port + "/" + instance;
 			}
 
-			LOG.info(" [" + name + "] " + schema + " URL: " + url);
+			LOG.debug(" [" + name + "] " + schema + " URL: " + url);
 
 			Connection connection = null;
 			try {
