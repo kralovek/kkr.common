@@ -7,6 +7,24 @@ import java.util.Collection;
 import java.util.Date;
 
 public class UtilsString {
+
+	public static String arrayToString(Object[] array, String before, String after, String separator) {
+		StringBuffer buffer = new StringBuffer();
+		for (Object value : array) {
+			if (buffer.length() != 0) {
+				buffer.append(separator);
+			}
+			if (before != null) {
+				buffer.append(before);
+			}
+			buffer.append(value);
+			if (after != null) {
+				buffer.append(after);
+			}
+		}
+		return buffer.toString();
+	}
+
 	public static String listToString(Collection<String> values, String before, String after, String separator) {
 		StringBuffer buffer = new StringBuffer();
 		for (String value : values) {
