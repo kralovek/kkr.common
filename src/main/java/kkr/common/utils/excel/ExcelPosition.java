@@ -15,36 +15,36 @@ public class ExcelPosition implements Cloneable {
 		return file;
 	}
 
-	public void setFile(File pFile) {
-		this.file = pFile;
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 	public String getSheet() {
 		return sheet;
 	}
 
-	public void setSheet(String pSheet) {
-		this.sheet = pSheet;
+	public void setSheet(String sheet) {
+		this.sheet = sheet;
 	}
 
 	public Integer getColumn() {
 		return column;
 	}
 
-	public void setColumn(Integer pColumn) {
-		this.column = pColumn;
+	public void setColumn(Integer column) {
+		this.column = column;
 	}
 
 	public Integer getRow() {
 		return row;
 	}
 
-	public void setRow(final Integer pRow) {
-		this.row = pRow;
+	public void setRow(final Integer row) {
+		this.row = row;
 	}
 
 	public String toString() {
-		return "[(" // 
+		return "[(" //
 				+ (file != null ? file.getAbsoluteFile() : "") //
 				+ ") " //
 				+ "{" + (sheet != null ? sheet : "") + "}" //
@@ -83,11 +83,5 @@ public class ExcelPosition implements Cloneable {
 		ep.sheet = sheet;
 		ep.column = column;
 		return ep;
-	}
-
-	public static final void main(String[] argv) {
-		for (int i = 0; i < 100; i++) {
-			System.out.println((i + 0) + " " + toCellId(i, 0));
-		}
 	}
 }

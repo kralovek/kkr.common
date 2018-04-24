@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class UtilsString {
 
-	public static String arrayToString(Object[] array, String before, String after, String separator) {
+	public static String toStringArray(Object[] array, String before, String after, String separator) {
 		StringBuffer buffer = new StringBuffer();
 		for (Object value : array) {
 			if (buffer.length() != 0) {
@@ -25,9 +25,9 @@ public class UtilsString {
 		return buffer.toString();
 	}
 
-	public static String listToString(Collection<String> values, String before, String after, String separator) {
+	public static <T> String toStringCollection(Collection<T> values, String before, String after, String separator) {
 		StringBuffer buffer = new StringBuffer();
-		for (String value : values) {
+		for (T value : values) {
 			if (buffer.length() != 0) {
 				buffer.append(separator);
 			}
@@ -127,5 +127,8 @@ public class UtilsString {
 		ex.printStackTrace(printStream);
 		printStream.close();
 		return byteArrayOutputStream.toString();
+	}
+
+	public static final void main(String[] argv) {
 	}
 }
